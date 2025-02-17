@@ -17,6 +17,6 @@ List heading:
 
 More bragging here.
 
-[parl]: https://pkg.go.dev/github.com/haraldrudell/parl"
+[parl]: https://pkg.go.dev/github.com/haraldrudell/parl
 */
 package testpackage

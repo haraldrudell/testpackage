@@ -7,4 +7,4 @@ module github.com/haraldrudell/testpackage
 //	- use of [iter.Seq] requires go1.23
 //  - go1.24 supported 250211–2026-02 upon go1.26 released
 //	- go1.23 supported 240813–2025-08 upon go1.25 released
-go 1.24
+go 1.23
