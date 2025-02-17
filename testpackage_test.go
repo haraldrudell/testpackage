@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"iter"
 	"os"
+	"path/filepath"
 )
 
 // LineReader is an iterator implementing the four needs:
@@ -22,8 +23,8 @@ func Example() {
 	defer errorHandler(&err)
 
 	// create test file
-	var filename = "test.txt"
-	if err = os.WriteFile(filename, []byte("one\ntwo\n"), 0600); err != nil {
+	var filename = filepath.Join(os.TempDir(), "test.txt")
+	if err = os.WriteFile(filename, []byte("one\ntwo\n"), 0o600); err != nil {
 		return
 	}
 
@@ -33,9 +34,13 @@ func Example() {
 	//   - LineReader is on stack even if NewLineReader is in another module
 	//   - LineReader pointer receiver is more performant
 	for line := range NewLineReader(&LineReader{}, filename, &err).Lines {
-		println("iterator line:", line)
+		fmt.Println("iterator line:", line)
 	}
 	// return here, err may be non-nil
+
+	// Output:
+	// iterator line: one
+	// iterator line: two
 }
 
 // LineReader provides an iterator reading a file line-by-line
