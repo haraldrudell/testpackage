@@ -9,13 +9,6 @@ import (
 	"path/filepath"
 )
 
-// LineReader is an iterator implementing the four needs:
-//   - 1 receive and maintain internal state: filename, errp, osFile
-//   - 2 provide iteration values and determine end of iteration: [LineReader.Lines]
-//   - 3 release resources upon end of iteration: [LineReader.cleanup]
-//   - 4 propagate error outside the for statement: errp
-//
-// by allocating LineReader on the stack, higher performance is achieved
 func Example() {
 
 	// errorHandler prints error message and exits 1 on error
@@ -55,7 +48,7 @@ type LineReader struct {
 
 // NewLineReader returns an iterator over the lines of a file
 //   - [LineReader.Lines] is iterator function
-//   - a new function provides LineReader encapsulation
+//   - new-function provides LineReader encapsulation
 func NewLineReader(fieldp *LineReader, filename string, errp *error) (lineReader *LineReader) {
 	if fieldp != nil {
 		lineReader = fieldp
@@ -68,7 +61,7 @@ func NewLineReader(fieldp *LineReader, filename string, errp *error) (lineReader
 	return
 }
 
-// Lines is a single-value string iterator
+// Lines is the iterator providing text-lines from the file filename
 //   - defer cleanup ensures cleanup is executed on panic
 //     in Lines method or for block
 //   - cleanup updates *LineReader.errp
